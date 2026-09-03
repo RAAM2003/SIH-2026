@@ -1,0 +1,29 @@
+[
+  {
+    "code": "sat",
+    "name": "Santali",
+    "maturity": "production",
+    "glossary_count": 1850,
+    "model_status": "active",
+    "offline_ready": true,
+    "language_level": "classroom-ready"
+  },
+  {
+    "code": "mun",
+    "name": "Mundari",
+    "maturity": "prototype",
+    "glossary_count": 1200,
+    "model_status": "fine-tuning",
+    "offline_ready": true,
+    "language_level": "prototype"
+  },
+  {
+    "code": "ho",
+    "name": "Ho",
+    "maturity": "prototype",
+    "glossary_count": 1180,
+    "model_status": "fine-tuning",
+    "offline_ready": true,
+    "language_level": "prototype"
+  }
+]

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <style>
+      :root {
+        --bg: #071a2e;
+        --panel: #0d2340;
+        --panel-2: #102d4d;
+        --accent: #51c7d5;
+        --accent-2: #7ee0b8;
+        --text: #edf4ff;
+        --muted: #aac7e8;
+        --border: rgba(255, 255, 255, 0.12);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, Arial, sans-serif;
+        background: linear-gradient(135deg, var(--bg), #0b1d32 55%, #0e2541);
+        color: var(--text);
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 24px 120px;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 32px;
+        align-items: center;
+      }
+      .eyebrow {
+        display: inline-block;
+        background: rgba(81, 199, 213, 0.12);
+        border: 1px solid var(--border);
+        padding: 8px 14px;
+        border-radius: 999px;
+        color: var(--accent);
+        letter-spacing: 0.08em;
+        font-size: 11px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+      h1 {
+        font-size: clamp(2.8rem, 5vw, 5rem);
+        line-height: 0.96;
+        margin: 0 0 18px;
+      }
+      .accent {
+        color: var(--accent);
+      }
+      .subtitle {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: var(--muted);
+        max-width: 640px;
+      }
+      .stats {
+        margin-top: 32px;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .pill {
+        padding: 14px 16px;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.02);
+        min-width: 150px;
+      }
+      .pill strong {
+        display: block;
+        font-size: 1.2rem;
+        margin-bottom: 4px;
+      }
+      .card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      }
+      .language-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 18px;
+      }
+      .lang {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 18px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: rgba(17, 42, 71, 0.8);
+      }
+      .lang span {
+        font-weight: 600;
+      }
+      .tag {
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .prod { background: rgba(126, 224, 184, 0.12); color: var(--accent-2); }
+      .proto { background: rgba(81, 199, 213, 0.12); color: var(--accent); }
+      .features {
+         margin-top: 72px;
+         display: grid;
+         grid-template-columns: repeat(3, minmax(0, 1fr));
+         gap: 20px;
+      }
+      .feature {
+         border: 1px solid var(--border);
+         border-radius: 18px;
+         padding: 24px;
+         background: rgba(255,255,255,0.02);
+      }
+      .feature h3 {
+         margin: 0 0 12px;
+      }
+      .feature p {
+         margin: 0;
+         color: var(--muted);
+         line-height: 1.7;
+      }
+      .translator {
+        margin-top: 72px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .translator h2 { margin-top: 0; }
+      .model-choice { display: grid; gap: 8px; margin-bottom: 14px; }
+      .model-choice label { color: var(--muted); font-size: 0.9rem; }
+      select {
+        width: 100%;
+        background: #081a2d;
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 12px;
+        font: inherit;
+      }
+      textarea {
+        width: 100%;
+        min-height: 150px;
+        resize: vertical;
+        background: #081a2d;
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px;
+        font: inherit;
+      }
+      .toolbar { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+      button {
+        border: 0;
+        border-radius: 10px;
+        padding: 12px 18px;
+        background: var(--accent);
+        color: #062031;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      button.secondary { background: var(--accent-2); }
+      button:disabled { opacity: 0.6; cursor: not-allowed; }
+      #translation-output { white-space: pre-wrap; min-height: 150px; line-height: 1.7; color: var(--accent-2); }
+      #translation-status { color: var(--muted); min-height: 1.5em; }
+      @media (max-width: 920px) {
+         .hero, .features, .translator { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Production AI Platform</div>
+          <h1>{{ title }} <span class="accent">for education</span></h1>
+          <p class="subtitle">
+            {{ subtitle }} — designed to support Hindi, Santali, Mundari, and Ho through modular translation,
+            language packs, and offline-ready deployment for classroom use.
+          </p>
+          <div class="stats">
+            <div class="pill"><strong>3</strong> tribal languages</div>
+            <div class="pill"><strong>1</strong> common platform</div>
+            <div class="pill"><strong>Offline</strong> ready</div>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Language maturity</h2>
+          <div class="language-grid">
+            {% for language in languages %}
+              <div class="lang">
+                <span>{{ language.name }}</span>
+                <span class="tag {{ 'prod' if language.maturity == 'Production' else 'proto' }}">
+                  {{ language.maturity }}
+                </span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <section class="translator" aria-labelledby="translator-title">
+        <div class="card">
+          <h2 id="translator-title">Hindi to Santali</h2>
+          <div class="model-choice">
+            <label for="model-backend">Translation model</label>
+            <select id="model-backend">
+              <option value="indictrans2">IndicTrans2 (default)</option>
+              <option value="backup">MADLAD-400 (public fallback)</option>
+            </select>
+          </div>
+          <textarea id="source-text" placeholder="Type Hindi text here..." aria-label="Hindi text"></textarea>
+          <div class="toolbar">
+            <button id="translate-button" type="button">Translate</button>
+            <button id="clear-button" class="secondary" type="button">Clear</button>
+          </div>
+          <p id="translation-status" role="status"></p>
+        </div>
+        <div class="card">
+          <h2>Santali output</h2>
+          <div id="translation-output" aria-live="polite">Your translation will appear here.</div>
+          <div class="toolbar">
+            <button id="listen-button" class="secondary" type="button" disabled>Audio unavailable</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="features">
+        <div class="feature">
+          <h3>Low-resource ML</h3>
+          <p>Modular architecture for language adaptation, glossary anchoring, and education-specific training pipelines.</p>
+        </div>
+        <div class="feature">
+          <h3>Speech + Translation</h3>
+          <p>ASR and TTS integration route for teacher speech, Hindi transcription, and tribal-language output.</p>
+        </div>
+        <div class="feature">
+          <h3>Offline deployment</h3>
+          <p>Language-pack strategy enables classroom use even with limited or no internet access.</p>
+        </div>
+      </section>
+    </div>
+    <script>
+      const sourceText = document.getElementById("source-text");
+      const output = document.getElementById("translation-output");
+      const status = document.getElementById("translation-status");
+      const translateButton = document.getElementById("translate-button");
+      const listenButton = document.getElementById("listen-button");
+      const modelBackend = document.getElementById("model-backend");
+
+      function santaliVoice() {
+        return window.speechSynthesis?.getVoices().find((voice) =>
+          voice.lang.toLowerCase().startsWith("sat")
+        );
+      }
+
+      translateButton.addEventListener("click", async () => {
+        const text = sourceText.value.trim();
+        if (!text) { status.textContent = "Enter text to translate."; return; }
+        translateButton.disabled = true;
+        status.textContent = "Translating with the Santali model...";
+        try {
+          const response = await fetch("/api/translate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ source_text: text, source_language: "hi", target_language: "sat", mode: "education", model_backend: modelBackend.value })
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.detail || "Translation failed");
+          output.textContent = data.translation;
+          const canPlayAudio = data.audio_available && Boolean(santaliVoice());
+          listenButton.disabled = !canPlayAudio;
+          listenButton.textContent = canPlayAudio ? "Play audio" : "Audio unavailable";
+          status.textContent = data.status === "completed" ? `Ready with ${data.model_version}.` : data.translation;
+        } catch (error) {
+          status.textContent = error.message;
+        } finally { translateButton.disabled = false; }
+      });
+
+      listenButton.addEventListener("click", () => {
+        if (!window.speechSynthesis) { status.textContent = "Audio is not supported in this browser."; return; }
+        const voice = santaliVoice();
+        if (!voice) {
+          status.textContent = "No Santali voice is installed in this browser.";
+          return;
+        }
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(output.textContent);
+        utterance.lang = voice.lang;
+        utterance.voice = voice;
+        window.speechSynthesis.speak(utterance);
+      });
+
+      window.speechSynthesis?.addEventListener("voiceschanged", () => {
+        if (listenButton.disabled && output.textContent !== "Your translation will appear here.") {
+          const canPlayAudio = santaliVoice() && output.textContent !== "Your translation will appear here.";
+          listenButton.disabled = !canPlayAudio;
+          listenButton.textContent = canPlayAudio ? "Play audio" : "Audio unavailable";
+        }
+      });
+
+      document.getElementById("clear-button").addEventListener("click", () => {
+        sourceText.value = "";
+        output.textContent = "Your translation will appear here.";
+        status.textContent = "";
+        listenButton.disabled = true;
+        listenButton.textContent = "Audio unavailable";
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+**Default model:**
+
+```bash
+source venv/bin/activate && export BHASHA_MODEL_BACKEND=indictrans2 && python -m uvicorn main:app --reload
+```
+
+**Backup model:**
+
+```bash
+source venv/bin/activate && export BHASHA_MODEL_BACKEND=backup && python -m uvicorn main:app --reload --reload-exclude 'venv/*'
+```

@@ -1,0 +1,69 @@
+Use these Hindi inputs one at a time:
+
+```text
+नमस्ते, आप कैसे हैं?
+```
+
+```text
+मेरा नाम रीना है।
+```
+
+```text
+यह एक पुस्तक है।
+```
+
+```text
+बच्चे स्कूल जा रहे हैं।
+```
+
+```text
+आज हम गणित पढ़ेंगे।
+```
+
+```text
+दो और तीन कितने होते हैं?
+```
+
+```text
+दो और तीन पाँच होते हैं।
+```
+
+```text
+कृपया पानी पीजिए।
+```
+
+```text
+सूरज पूर्व दिशा से उगता है।
+```
+
+```text
+पेड़ हमें छाया और हवा देते हैं।
+```
+
+```text
+बच्चों को रोज़ पढ़ना चाहिए।
+```
+
+```text
+अपना हाथ धोकर भोजन कीजिए।
+```
+
+```text
+यह लाल रंग की गेंद है।
+```
+
+```text
+मेरे पास पाँच आम हैं।
+```
+
+```text
+कक्षा में शिक्षक कहानी पढ़ा रहे हैं।
+```
+
+For the first test, use:
+
+```text
+यह एक पुस्तक है।
+```
+
+Check that the output is in Santali/Ol Chiki script and that **Play audio** becomes available after a successful translation.
